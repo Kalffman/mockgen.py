@@ -1,4 +1,3 @@
-from pydantic import BaseModel
 
 
 class PersonNameCSV:
@@ -15,12 +14,3 @@ class PersonNameCSV:
     def __init__(self, **data) -> None:
         for key in data:
             setattr(self, key, data[key])
-
-
-class PersonNameDTO(BaseModel):
-    name: str
-    variations: list[str]
-
-
-class PersonNameResponseDTO(BaseModel):
-    data: PersonNameDTO

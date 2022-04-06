@@ -1,7 +1,6 @@
 import abc
 
-from types import MethodType
-from domain.model.entity import PersonName
+from domain.model.entity import PersonName, PersonFullName
 
 
 class PersonNameDataUseCase(abc.ABC):
@@ -14,7 +13,8 @@ class PersonNameDataUseCase(abc.ABC):
 class PersonNameDataAccessUseCase(abc.ABC):
     person_data: PersonNameDataUseCase
 
-    async def get_random_person_name(self) -> any:
+    @abc.abstractmethod
+    async def get_random_name(self) -> any:
         raise NotImplementedError
 
 
@@ -24,4 +24,8 @@ class ConsultPersonNameUseCase(abc.ABC):
 
     @abc.abstractmethod
     def get_random_person_name(self) -> PersonName:
+        raise NotImplementedError
+
+    @abc.abstractmethod
+    def get_random_full_name(self, weight: int) -> PersonFullName:
         raise NotImplementedError
