@@ -1,11 +1,11 @@
 import random
 
-from domain.ports.usecase.person_name_usecase import PersonNameDataAccessUseCase
+from domain.ports.input.usecase import PersonNameDataAccessPort
 from file_infra.adapter.output.model import PersonNameCSV
-from file_infra.adapter.output.person_name_data_csv import PersonNameDataCSV
+from file_infra.adapter.output.csv import PersonNameDataCSV
 
 
-class PersonNameDataAccessCSV(PersonNameDataAccessUseCase):
+class PersonNameDataAccessCSV(PersonNameDataAccessPort):
 
     person_data = PersonNameDataCSV()
 

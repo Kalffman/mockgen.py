@@ -1,6 +1,8 @@
+from domain.model.entity import PersonName, Data
 
 
-class PersonNameCSV:
+class PersonNameCSV(Data):
+
     alternative_names: list[str]
     classification: str
     first_name: str
@@ -14,3 +16,6 @@ class PersonNameCSV:
     def __init__(self, **data) -> None:
         for key in data:
             setattr(self, key, data[key])
+
+    def to_model(self) -> PersonName:
+        return PersonName(name=self.group_name, variations=self.alternative_names, genre=self.classification)

@@ -1,6 +1,6 @@
 from domain.model.entity import PersonName, PersonFullName
-from domain.ports.usecase.person_name_usecase import ConsultPersonNameUseCase
-from fastapi_infra.adapter.output.person_name_data_access import PersonNameDataAccessCSV
+from domain.ports.input.usecase import ConsultPersonNameUseCase
+from fastapi_infra.adapter.output.data_access import PersonNameDataAccessCSV
 
 
 class PersonNameService(ConsultPersonNameUseCase):
@@ -10,7 +10,7 @@ class PersonNameService(ConsultPersonNameUseCase):
     async def get_random_person_name(self) -> PersonName:
         person = await self.person_name_data_access.get_random_name()
 
-        return PersonName(name=person.group_name, variations=person.alternative_names, genre=person.classification)
+        return person.to_model()
 
     async def get_random_full_name(self, weight: int) -> PersonFullName:
         full_name_arr = [await self.get_random_person_name() for _ in range(weight)]

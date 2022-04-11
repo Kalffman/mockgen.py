@@ -1,4 +1,6 @@
-import re
+import abc
+
+from domain import utils
 import random
 
 
@@ -28,19 +30,11 @@ class PersonFullName:
         for key in kwargs:
             setattr(self, key, kwargs[key])
 
-        self.full_name = re.sub(' +', ' ', self.full_name)
+        self.full_name = utils.resolve_full_name(self.full_name)
 
-        full_name_arr = re.split('\\s', self.full_name)
 
-        spaces = len(full_name_arr) - 1
+class Data(abc.ABC):
 
-        if spaces >= 3:
-            full_name_arr.insert(-2, "DE")
-
-            self.full_name = " ".join(full_name_arr)
-
-        elif spaces > 1:
-            full_name_arr.insert(-1, "DE")
-
-            self.full_name = " ".join(full_name_arr)
-
+    @abc.abstractmethod
+    def to_model(self) -> any:
+        raise NotImplementedError
