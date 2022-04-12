@@ -16,3 +16,18 @@ class PersonNameDataAccessPort(abc.ABC):
     @abc.abstractmethod
     async def get_random_name(self) -> Data:
         raise NotImplementedError
+
+
+class PersonDocumentDataAccessPort(abc.ABC):
+
+    class PersonDocumentData(abc.ABC):
+
+        @abc.abstractmethod
+        async def get_data(self) -> any:
+            raise NotImplementedError
+
+    document_data: PersonDocumentData
+
+    @abc.abstractmethod
+    async def get_random_document(self) -> Data:
+        raise NotImplementedError

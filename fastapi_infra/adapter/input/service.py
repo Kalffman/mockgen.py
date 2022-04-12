@@ -1,6 +1,6 @@
 from domain.model.entity import PersonName, PersonFullName
 from domain.ports.input.usecase import ConsultPersonNameUseCase
-from file_infra.adapter.output.data_access import PersonNameDataAccessCSV
+from csv_file_infra.adapter.output.data_access import PersonNameDataAccessCSV
 
 
 class PersonNameService(ConsultPersonNameUseCase):

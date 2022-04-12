@@ -33,6 +33,16 @@ class PersonFullName:
         self.full_name = utils.resolve_full_name(self.full_name)
 
 
+class PersonDocument:
+    type: str
+    document: str
+    complement: dict
+
+    def __init__(self, **kwargs) -> None:
+        for key in kwargs:
+            setattr(self, key, kwargs[key])
+
+
 class Data(abc.ABC):
 
     @abc.abstractmethod

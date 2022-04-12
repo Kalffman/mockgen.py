@@ -2,7 +2,7 @@ from fastapi import FastAPI, Query
 from fastapi.responses import RedirectResponse
 
 from fastapi_infra.adapter.input.service import PersonNameService
-from fastapi_infra.adapter.output.model import PersonNameDTO, PersonNameResponseDTO, PersonFullNameResponseDTO, \
+from fastapi_infra.adapter.input.dto import PersonNameDTO, PersonNameResponseDTO, PersonFullNameResponseDTO, \
     PersonFullNameDTO
 
 app = FastAPI()
