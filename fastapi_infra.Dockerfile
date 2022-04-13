@@ -6,7 +6,7 @@ COPY . .
 
 RUN pip install --no-cache-dir -r ./fastapi_infra/requirements.txt
 
-ENV PERSON_NAME_DATA=/usr/src/app/data/names.csv
+ENV PERSON_NAME_DATA=/usr/src/app/csv_data/names.csv
 
 EXPOSE 8080
 

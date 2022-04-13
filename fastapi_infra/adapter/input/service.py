@@ -1,4 +1,5 @@
 from algorithm_infra.adapter.output.data_access import CPFDataAccessGenerator
+from algorithm_infra.adapter.output.model import CPF
 from domain.ports.input.model import PersonName, PersonFullName, PersonDocument
 from domain.ports.input.usecase import ConsultPersonNameUseCase, ConsultPersonDocumentUseCase
 from csv_file_infra.adapter.output.data_access import PersonNameDataAccessCSV
@@ -35,7 +36,10 @@ class CPFService(ConsultPersonDocumentUseCase):
 
     person_document_data_access = CPFDataAccessGenerator()
 
-    async def get_random_document(self) -> PersonDocument:
+    async def get_random_document(self, mask: bool = False) -> PersonDocument:
         document = await self.person_document_data_access.get_random_document()
+
+        if mask:
+            document.cpf = "{}{}{}.{}{}{}.{}{}{}-{}{}".format(*document.cpf)
 
         return document.to_model()

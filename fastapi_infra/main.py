@@ -50,10 +50,8 @@ async def full_name(size: int = Query(description="Tamanho do nome", default=2, 
 @app.get("/random_cpf",
          description="Rota para gerar CPF aleatório",
          response_model=PersonDocumentRespoonseDTO)
-async def random_cpf():
-    document = await cpf_service.get_random_document()
-
-    print(document.document)
+async def random_cpf(mask: bool = Query(description="Habilita ou não o conteúdo mascarado", default=False)):
+    document = await cpf_service.get_random_document(mask)
 
     return PersonDocumentRespoonseDTO(
         data=PersonDocumentDTO(
