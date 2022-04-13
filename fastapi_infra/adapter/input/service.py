@@ -1,7 +1,6 @@
 from algorithm_infra.adapter.output.data_access import CPFDataAccessGenerator
-from algorithm_infra.adapter.output.model import CPF
 from domain.ports.input.model import PersonName, PersonFullName, PersonDocument
-from domain.ports.input.usecase import ConsultPersonNameUseCase, ConsultPersonDocumentUseCase
+from domain.ports.input.usecase import ConsultPersonNameUseCase, ConsultPersonDocumentUseCase, ConsultPersonUseCase
 from csv_file_infra.adapter.output.data_access import PersonNameDataAccessCSV
 
 
@@ -43,3 +42,8 @@ class CPFService(ConsultPersonDocumentUseCase):
             document.cpf = "{}{}{}.{}{}{}.{}{}{}-{}{}".format(*document.cpf)
 
         return document.to_model()
+
+
+class PersonService(ConsultPersonUseCase):
+    person_name_use_case = PersonNameService()
+    person_document_use_case = CPFService()
