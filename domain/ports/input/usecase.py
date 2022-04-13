@@ -1,6 +1,6 @@
 import abc
 
-from domain.model.entity import PersonName, PersonFullName, PersonDocument
+from domain.ports.input.model import PersonName, PersonFullName, PersonDocument
 from domain.ports.output.data_access import PersonNameDataAccessPort, PersonDocumentDataAccessPort
 
 

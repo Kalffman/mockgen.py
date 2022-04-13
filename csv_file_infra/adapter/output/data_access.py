@@ -2,7 +2,7 @@ import csv
 import os
 import random
 
-from domain.ports.output.data_access import PersonNameDataAccessPort
+from domain.ports.output.data_access import PersonNameDataAccessPort, ResourceData
 from .model import PersonNameCSV
 
 
@@ -11,7 +11,7 @@ CSV_PERSON_NAME_DATA_PATH = os.environ.get("PERSON_NAME_DATA")
 
 class PersonNameDataAccessCSV(PersonNameDataAccessPort):
 
-    class PersonNameDataCSV(PersonNameDataAccessPort.PersonNameData):
+    class PersonNameDataCSV(ResourceData):
         __person_names: list[PersonNameCSV]
 
         def __init__(self) -> None:

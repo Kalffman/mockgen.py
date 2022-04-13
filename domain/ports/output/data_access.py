@@ -1,17 +1,18 @@
 import abc
 
-from domain.model.entity import Data
+from domain.ports.output.model import Data
+
+
+class ResourceData(abc.ABC):
+
+    @abc.abstractmethod
+    async def get_data(self) -> any:
+        raise NotImplementedError
 
 
 class PersonNameDataAccessPort(abc.ABC):
 
-    class PersonNameData(abc.ABC):
-
-        @abc.abstractmethod
-        async def get_data(self) -> any:
-            raise NotImplementedError
-
-    person_data: PersonNameData
+    person_data: ResourceData
 
     @abc.abstractmethod
     async def get_random_name(self) -> Data:
@@ -20,13 +21,7 @@ class PersonNameDataAccessPort(abc.ABC):
 
 class PersonDocumentDataAccessPort(abc.ABC):
 
-    class PersonDocumentData(abc.ABC):
-
-        @abc.abstractmethod
-        async def get_data(self) -> any:
-            raise NotImplementedError
-
-    document_data: PersonDocumentData
+    document_data: ResourceData
 
     @abc.abstractmethod
     async def get_random_document(self) -> Data:

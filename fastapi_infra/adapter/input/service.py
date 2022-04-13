@@ -1,5 +1,6 @@
-from domain.model.entity import PersonName, PersonFullName
-from domain.ports.input.usecase import ConsultPersonNameUseCase
+from algorithm_infra.adapter.output.data_access import CPFDataAccessGenerator
+from domain.ports.input.model import PersonName, PersonFullName, PersonDocument
+from domain.ports.input.usecase import ConsultPersonNameUseCase, ConsultPersonDocumentUseCase
 from csv_file_infra.adapter.output.data_access import PersonNameDataAccessCSV
 
 
@@ -28,3 +29,13 @@ class PersonNameService(ConsultPersonNameUseCase):
         )
 
         return person_full_name
+
+
+class CPFService(ConsultPersonDocumentUseCase):
+
+    person_document_data_access = CPFDataAccessGenerator()
+
+    async def get_random_document(self) -> PersonDocument:
+        document = await self.person_document_data_access.get_random_document()
+
+        return document.to_model()
