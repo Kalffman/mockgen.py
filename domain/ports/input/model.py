@@ -1,3 +1,5 @@
+from datetime import date
+
 from domain import utils
 import random
 
@@ -5,7 +7,7 @@ import random
 class PersonName:
     name: str
     variations: list[str]
-    genre: str
+    gender: str
 
     def __init__(self, **kwargs) -> None:
         for key in kwargs:
@@ -23,6 +25,7 @@ class PersonFullName:
     first_name: str
     last_name: str
     full_name: str
+    gender: str
 
     def __init__(self, **kwargs) -> None:
         for key in kwargs:
@@ -43,6 +46,8 @@ class PersonDocument:
 class Person:
     name: PersonFullName
     documents: list[PersonDocument]
+    birth_date: date
+    gender: str
 
     def __init__(self, **kwargs) -> None:
         for key in kwargs:

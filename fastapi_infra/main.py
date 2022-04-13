@@ -53,9 +53,10 @@ async def index():
          tags=["person"],
          description="Rota para gerar uma pessoa física com dados aleatórios",
          response_model=PersonResponseDTO)
-async def random_person(name_size: int = Query(description="Tamanho do nome", default=2, ge=2, le=5),
-                        mask: bool = Query(description="Habilita ou não o conteúdo mascarado", default=False)):
-    person = await person_service.get_random_person(mask, name_size)
+async def random_person(name_size: int = Query(description="Tamanho do nome", default=3, ge=2, le=5),
+                        mask: bool = Query(description="Habilita ou não o conteúdo mascarado", default=False),
+                        years_old: int = Query(description="Anos de idade", default=20, ge=16, le=99)):
+    person = await person_service.get_random_person(mask, name_size, years_old)
 
     return dto_parser.parse_to_dto(person)
 
