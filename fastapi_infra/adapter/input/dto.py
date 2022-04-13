@@ -1,3 +1,5 @@
+from datetime import date
+
 from pydantic import BaseModel
 
 from domain.ports.input.model import PersonName, PersonFullName, Person, PersonDocument
@@ -6,7 +8,7 @@ from domain.ports.input.model import PersonName, PersonFullName, Person, PersonD
 class PersonNameDTO(BaseModel):
     name: str
     variations: list[str]
-    genre: str
+    gender: str
 
 
 class PersonNameResponseDTO(BaseModel):
@@ -17,6 +19,7 @@ class PersonFullNameDTO(BaseModel):
     first_name: str
     last_name: str
     full_name: str
+    gender: str
 
 
 class PersonFullNameResponseDTO(BaseModel):
@@ -35,6 +38,8 @@ class PersonDocumentRespoonseDTO(BaseModel):
 class PersonDTO(BaseModel):
     full_name: str
     cpf: str
+    birth_date: date
+    gender: str
 
 
 class PersonResponseDTO(BaseModel):
@@ -47,7 +52,7 @@ class DTOParser:
         return PersonNameDTO(
             name=person_name.name,
             variations=person_name.variations,
-            genre=person_name.genre,
+            gender=person_name.gender,
         )
 
     def parse_to_PersonFullNameDTO(self, person_full_name: PersonFullName) -> PersonFullNameDTO:
@@ -55,6 +60,7 @@ class DTOParser:
             full_name=person_full_name.full_name,
             first_name=person_full_name.first_name,
             last_name=person_full_name.last_name,
+            gender=person_full_name.gender,
         )
 
     def parse_to_PersonDocumentDTO(self, person_document: PersonDocument) -> PersonDocumentDTO:
@@ -67,6 +73,8 @@ class DTOParser:
         return PersonDTO(
             full_name=person.name.full_name,
             cpf=person.get_document("CPF").document,
+            birth_date=person.birth_date,
+            gender=person.gender,
         )
 
     def parse_to_dto(self, model):

@@ -25,7 +25,8 @@ class PersonNameService(ConsultPersonNameUseCase):
         person_full_name = PersonFullName(
             first_name=first_name.name,
             last_name=last_name.name,
-            full_name=f"{first_name.name} {middle_name} {last_name.name}"
+            full_name=f"{first_name.name} {middle_name} {last_name.name}",
+            gender=first_name.gender
         )
 
         return person_full_name
