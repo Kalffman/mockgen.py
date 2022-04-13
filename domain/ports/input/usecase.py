@@ -1,6 +1,6 @@
 import abc
 
-from domain.model.entity import PersonName, PersonFullName, PersonDocument
+from domain.ports.input.model import PersonName, PersonFullName, PersonDocument
 from domain.ports.output.data_access import PersonNameDataAccessPort, PersonDocumentDataAccessPort
 
 
@@ -22,6 +22,6 @@ class ConsultPersonDocumentUseCase(abc.ABC):
     person_document_data_access: PersonDocumentDataAccessPort
 
     @abc.abstractmethod
-    def get_random_document(self) -> PersonDocument:
+    def get_random_document(self, mask: bool) -> PersonDocument:
         raise NotImplementedError
 
