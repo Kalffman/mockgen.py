@@ -10,19 +10,20 @@ class CPFDataAccessGenerator(PersonDocumentDataAccessPort):
 
         @staticmethod
         def extract_verifier(numbers: dict):
-            dv_1 = 0
+            dv = 0
 
             for it in numbers.values():
-                dv_1 += it["mult"]
+                dv += it["mult"]
 
-            dv_1 = 11 - divmod(dv_1, 11)[1]
+            dv = 11 - divmod(dv, 11)[1]
 
-            return 0 if dv_1 >= 10 else dv_1
+            return 0 if dv >= 10 else dv
 
         @staticmethod
         def multiply_factor(numbers: dict):
+            numbers_len = len(numbers) + 1
             for idx, it in enumerate(numbers):
-                fac = 10 - idx
+                fac = numbers_len - idx
 
                 numbers[it]["mult"] = numbers[it]["origin"] * fac
 
