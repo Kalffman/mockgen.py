@@ -1,5 +1,3 @@
-import abc
-
 from domain import utils
 import random
 
@@ -40,3 +38,17 @@ class PersonDocument:
     def __init__(self, **kwargs) -> None:
         for key in kwargs:
             setattr(self, key, kwargs[key])
+
+
+class Person:
+    name: PersonFullName
+    documents: list[PersonDocument]
+
+    def __init__(self, **kwargs) -> None:
+        for key in kwargs:
+            setattr(self, key, kwargs[key])
+
+    def get_document(self, document_type: str) -> PersonDocument:
+        for it in self.documents:
+            if it.doc_type == document_type:
+                return it
