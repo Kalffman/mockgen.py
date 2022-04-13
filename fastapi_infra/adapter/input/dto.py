@@ -19,3 +19,12 @@ class PersonFullNameDTO(BaseModel):
 
 class PersonFullNameResponseDTO(BaseModel):
     data: PersonFullNameDTO
+
+
+class PersonDocumentDTO(BaseModel):
+    doc_type: str
+    document: str
+
+
+class PersonDocumentRespoonseDTO(BaseModel):
+    data: PersonDocumentDTO

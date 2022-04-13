@@ -1,13 +1,15 @@
 from fastapi import FastAPI, Query
 from fastapi.responses import RedirectResponse
 
-from fastapi_infra.adapter.input.service import PersonNameService
-from fastapi_infra.adapter.input.dto import PersonNameDTO, PersonNameResponseDTO, PersonFullNameResponseDTO, \
-    PersonFullNameDTO
+from fastapi_infra.adapter.input.service import PersonNameService, CPFService
+from fastapi_infra.adapter.input.dto import PersonNameDTO, PersonNameResponseDTO, \
+    PersonFullNameDTO, PersonFullNameResponseDTO, PersonDocumentDTO, PersonDocumentRespoonseDTO
 
 app = FastAPI()
 
 person_service = PersonNameService()
+
+cpf_service = CPFService()
 
 
 @app.get("/", response_class=RedirectResponse)
@@ -20,6 +22,7 @@ async def index():
          response_model=PersonNameResponseDTO)
 async def random_name():
     person_name = await person_service.get_random_person_name()
+
     return PersonNameResponseDTO(
         data=PersonNameDTO(
             name=person_name.name,
@@ -40,5 +43,19 @@ async def full_name(size: int = Query(description="Tamanho do nome", default=2, 
             first_name=person_full_name.first_name,
             last_name=person_full_name.last_name,
             full_name=person_full_name.full_name,
+        )
+    )
+
+
+@app.get("/random_cpf",
+         description="Rota para gerar CPF aleatório",
+         response_model=PersonDocumentRespoonseDTO)
+async def random_cpf(mask: bool = Query(description="Habilita ou não o conteúdo mascarado", default=False)):
+    document = await cpf_service.get_random_document(mask)
+
+    return PersonDocumentRespoonseDTO(
+        data=PersonDocumentDTO(
+            doc_type=document.doc_type,
+            document=document.document
         )
     )
