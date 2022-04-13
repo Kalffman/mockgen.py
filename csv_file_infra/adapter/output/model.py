@@ -15,4 +15,4 @@ class PersonNameCSV(Data):
     ratio: float
 
     def to_model(self) -> PersonName:
-        return PersonName(name=self.group_name, variations=self.alternative_names, genre=self.classification)
+        return PersonName(name=self.group_name, variations=self.alternative_names, gender=self.classification)

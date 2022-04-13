@@ -1,4 +1,4 @@
-import abc
+from datetime import date
 
 from domain import utils
 import random
@@ -7,7 +7,7 @@ import random
 class PersonName:
     name: str
     variations: list[str]
-    genre: str
+    gender: str
 
     def __init__(self, **kwargs) -> None:
         for key in kwargs:
@@ -25,6 +25,7 @@ class PersonFullName:
     first_name: str
     last_name: str
     full_name: str
+    gender: str
 
     def __init__(self, **kwargs) -> None:
         for key in kwargs:
@@ -40,3 +41,19 @@ class PersonDocument:
     def __init__(self, **kwargs) -> None:
         for key in kwargs:
             setattr(self, key, kwargs[key])
+
+
+class Person:
+    name: PersonFullName
+    documents: list[PersonDocument]
+    birth_date: date
+    gender: str
+
+    def __init__(self, **kwargs) -> None:
+        for key in kwargs:
+            setattr(self, key, kwargs[key])
+
+    def get_document(self, document_type: str) -> PersonDocument:
+        for it in self.documents:
+            if it.doc_type == document_type:
+                return it
